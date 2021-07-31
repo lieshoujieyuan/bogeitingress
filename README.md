@@ -13,12 +13,10 @@ k8s bogeit  ingress
         |
   ------------
   [ Services ]
+
 另外可以我们通过LoadBalancer负载均衡来提供外部流量的的访问，但这种模式对于实际生产来说，用起来不是很方便，而且用这种模式就意味着每个服务都需要有自己的的负载均衡器以及独立的公有IP。
 
 我们这是用Ingress，因为Ingress只需要一个公网IP就能为K8s上所有的服务提供访问，Ingress工作在7层（HTTP），Ingress会根据请求的主机名以及路径来决定把请求转发到相应的服务，如下图所示：
-
-ingress
-
 Ingress是允许入站连接到达集群服务的一组规则。即介于物理网络和群集svc之间的一组转发规则。 
 其实就是实现L4 L7的负载均衡:
 注意：这里的Ingress并非将外部流量通过Service来转发到服务pod上，而只是通过Service来找到对应的Endpoint来发现pod进行转发
@@ -841,10 +839,5 @@ spec:
 # 进行更新
 # kubectl  apply -f nginx-ingress.yaml         
 ingress.extensions/nginx-ingress configured
-现在再来看看https访问的效果：
-
+现在再来看看https访问的效果
 注意：这里因为是我自签的证书，所以浏览器地访问时会提示您的连接不是私密连接 ，我这里用的谷歌浏览器，直接点高级，再点击继续前往nginx.boge.com（不安全）
-
-ingress-tls
-
-© 2021 GitHub, Inc.
